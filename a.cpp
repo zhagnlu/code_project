@@ -26,7 +26,7 @@ int main()
 	freopen("input","r",stdin);
 #endif
 
-
-	while(scanf("",))
+        int p;
+	while(scanf("%d",&p)) 
 }
 
