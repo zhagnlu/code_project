@@ -26,7 +26,10 @@ int main()
 	freopen("input","r",stdin);
 #endif
 
-        int p;
-	while(scanf("%d",&p)) 
+	char p[4];
+	char p1[]="sdd";
+	strcpy(p,p1);
+	cout<<p<<endl;
 }
+
 
