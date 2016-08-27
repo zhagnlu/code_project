@@ -66,8 +66,8 @@ void print_inorder(node* root)
 		node* p=st.top();
 		cout<< p->value;
 		st.pop();
-		if(!p->left)   st.push(p->left);
-		if(!p->right)  st.push(p->right);
+		if(p->left)   st.push(p->left);
+		if(p->right)  st.push(p->right);
 	}
 }
 int main()
