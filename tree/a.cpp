@@ -37,7 +37,7 @@ int  create_tree( node *&root)
 {
 	int value;
 	scanf("%d",&value);
-	if(value=='0') {
+	if(value==0) {
 		root=NULL;
 //		return 0;
 	}
@@ -56,6 +56,20 @@ void print_tree(node* root)
 	pr(root->value);
 	print_tree(root->right);
 }
+
+void print_inorder(node* root)
+{
+	if(root==NULL) return;
+	stack<node*> st;
+	st.push(root);
+	while(!st.empty()){
+		node* p=st.top();
+		cout<< p->value;
+		st.pop();
+		if(!p->left)   st.push(p->left);
+		if(!p->right)  st.push(p->right);
+	}
+}
 int main()
 {
 #ifdef LOCAL
@@ -63,7 +77,8 @@ int main()
 #endif
 	node* root;
 	create_tree(root);
-	print_tree(root);
+//	print_tree(root);
+	print_inorder(root);
 }
 
 
