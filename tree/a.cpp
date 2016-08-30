@@ -61,7 +61,7 @@ void print_inorder(node* root)
 	if(root==NULL) return ;
 	stack<node*> st;
 	node* p=root;
-	while(p||st.empty()){
+	while(p||!st.empty()){
 		while(p){
 			st.push(p);
 			p=p->left;
@@ -73,6 +73,7 @@ void print_inorder(node* root)
 			p=p->right;
 		}
 	}
+	return ;
 }
 
 void print_preorder(node* root)
