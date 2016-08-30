@@ -56,8 +56,26 @@ void print_tree(node* root)
 	pr(root->value);
 	print_tree(root->right);
 }
-
 void print_inorder(node* root)
+{
+	if(root==NULL) return ;
+	stack<node*> st;
+	node* p=root;
+	while(p||st.empty()){
+		while(p){
+			st.push(p);
+			p=p->left;
+		}
+		if(p){
+			p=st.top();
+			cout<<p->value;
+			st.pop();
+			p=p->right;
+		}
+	}
+}
+
+void print_preorder(node* root)
 {
 	if(root==NULL) return;
 	stack<node*> st;
