@@ -4,7 +4,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <algorithm>
-#include <math.h>
 #include <map>
 #include <vector>
 #include <queue>
@@ -12,7 +11,7 @@
 #include <list>
 #include <deque>
 
-//#define LOCAL
+#define LOCAL
 
 #define pr(x) cout << x << "  "
 #define prln(x) cout << x << endl
@@ -26,11 +25,10 @@ int main()
 #ifdef LOCAL
 	freopen("input","r",stdin);
 #endif
+	string s("zhanglua");
+	s.insert(0,"ji");
+	reverse(s.begin(),s.end());
+	cout<<s;
 
-	char p[4];
-	char p1[]="sdd";
-	strcpy(p,p1);
-	cout<<p<<endl;
 }
-
 

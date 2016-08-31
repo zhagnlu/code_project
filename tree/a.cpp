@@ -66,7 +66,7 @@ void print_inorder(node* root)
 			st.push(p);
 			p=p->left;
 		}
-		if(p){
+		if(!st.empty()){
 			p=st.top();
 			cout<<p->value;
 			st.pop();
@@ -75,7 +75,28 @@ void print_inorder(node* root)
 	}
 	return ;
 }
-
+void print_post(node * root)
+{	
+	if(root==NULL) return ;
+	stack< pair<node*,bool> > st;
+	st.push(make_pair(root,false));
+	node* p;
+	bool visit;
+	while(!st.empty()){
+		 p=st.top().first;
+		 visit=st.top().second;
+		 st.pop();
+		 if(p==NULL) continue;
+		 if(visit==true){
+			 cout<<p->value;
+		 }
+		else{
+			st.push(make_pair(p,true));
+			st.push(make_pair(p->right,false));
+			st.push(make_pair(p->left,false));
+		}
+	}
+}
 void print_preorder(node* root)
 {
 	if(root==NULL) return;
@@ -96,8 +117,9 @@ int main()
 #endif
 	node* root;
 	create_tree(root);
-//	print_tree(root);
+	print_tree(root);
 	print_inorder(root);
+	print_post(root);
 }
 
 

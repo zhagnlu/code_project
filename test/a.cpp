@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 #include <algorithm>
 #include <map>
 #include <vector>
@@ -67,7 +68,7 @@ int  find_height(vector< pair<int,int> >p, int j)
 		}
 		else{
 			propotion=(float)(m-x)/p[i].first;
-			if(p[i].second*propotion>y) y=p[i].second*propotion;
+			if(ceil(int(p[i].second*propotion))>y) y=p[i].second*propotion;
 			x=0;
 			height+=y;
 			y=0;
