@@ -1,0 +1,79 @@
+#include "stdafx.h"
+#include <stdio.h>
+#include <iostream>
+#include <string.h>
+#include <stdlib.h>
+#include <algorithm>
+#include <math.h>
+#include <map>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <list>
+#include <deque>
+
+#define inf 0x7fffffff
+using namespace std;
+
+class act{
+public:
+	int start;
+	int end;
+	int price;
+	bool select;
+	act(int a,int b,bool c,int d):start(a),end(b),price(d),select(c){}
+};
+
+
+vector<act> acts;
+
+int maxl=-inf;
+int func(vector<act> &acts,int &price){
+	vector<act>::iterator it,it1;
+	for(it=acts.begin();it!=acts.end();it++){
+		if(it->select==false){			
+			int st=it->start;
+			int end=it->end;
+			int value=it->price;
+			for(it1=acts.begin();it1!=acts.end();it1++){
+				if(it1->select==false||st>=it1->end||end<=it1->start){
+					continue;}
+				else{ break;}
+			}
+			if(it1==acts.end()){
+				it->select=true;
+				price+=value;
+				func(acts,price);
+				if(price>maxl){maxl=price;}
+				it->select=false;
+				price-=value;
+				
+			}
+		}
+	}
+	return 0;
+}
+
+		
+
+
+
+
+int main()
+{
+	freopen("input.txt","r",stdin);
+	int start,end,price;
+	while(scanf("%d%d%d",&start,&end,&price)!=EOF){
+		acts.push_back(act(start,end,false,price));
+	}
+	int priceall=0;
+	func(acts,priceall);
+	cout<<maxl;
+
+
+
+	
+
+
+
+}
