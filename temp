@@ -1,0 +1,121 @@
+// test1.cpp : 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include <stdio.h>
+#include <iostream>
+#include <string.h>
+#include <stdlib.h>
+#include <algorithm>
+#include <math.h>
+#include <map>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <list>
+#include <deque>
+
+#define inf 0x7fffffff
+using namespace std;
+
+int dir[4][2] = { { 0,-1 },{ 0,1 },{ -1,0 },{ 1,0 } };
+int x, y;
+int n, m, total, p[12][12], f[12][12],xl[12][12],yl[12][12];
+stack <pair<int, int> >result;
+
+class Point {
+
+public:int x, y, len, prex, prey;
+
+	   Point(int _x, int _y, int _len) {
+
+		   x = _x; y = _y; len = _len;
+
+	   }
+	   void set(int a, int b) {
+		   prex = a;
+		   prey = b;
+
+	   };
+};
+int bfs(queue<Point> Q) {
+	
+		Q.push(Point(0, 0, 0));
+	
+		while (!Q.empty()) {
+			
+				Point f = Q.front();
+			
+				Q.pop();
+				
+				for (int i = 0; i<4; i++) {
+					
+						x = f.x + dir[i][0];
+					
+						y = f.y + dir[i][1];
+						int k;
+						if (i == 0||i==1) k = 1;
+						if (i == 3) k = 3;
+						if (i == 4) k = 0;
+					
+						if (x == 0 && y == m - 1) return f.len + k;
+					
+						if (x >= 0 && y >= 0 && x < n && y<m && p[x][y]) {
+							
+							
+								Q.push(Point(x, y, f.len + k));
+								xl[x][y]= f.x;
+								yl[x][y] = f.y;
+							
+								p[x][y] = 0;
+							
+						}
+					
+				}
+			
+		}
+	
+		return -1;
+
+}
+
+
+
+int main()
+{
+	scanf_s("%d%d%d", &n, &m, &total);
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			scanf_s("%d", &p[i][j]);
+		}
+	}
+	queue<Point> Q;
+	if (bfs(Q) > total) { cout << "Can not escape!" << endl; }
+	else {
+		int xq = 0;
+		int yq = m - 1;
+		while(!(xq==0&&yq==0)){
+			result.push(make_pair(xl[xq][yq], yl[xq][yq]));
+			xq = xl[xq][yq];
+			yq = yl[xq][yq];
+
+		}
+		pair<int, int> aa;
+		
+		while (!result.empty()) {
+			aa = result.top();
+			result.pop();
+			cout << "[" << aa.first << "," << aa.second << "]";
+
+		}
+	}
+
+}
+
+
+
+	
+	
+	
+
